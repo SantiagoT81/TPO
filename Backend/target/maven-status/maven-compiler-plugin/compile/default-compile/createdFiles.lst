@@ -1,14 +1,17 @@
 com\example\demo\DemoApplication.class
 com\example\demo\Models\Usuario.class
 com\example\demo\Models\Upload.class
+com\example\demo\Services\UploadService.class
 com\example\demo\Models\Autor.class
 com\example\demo\Repositories\UsuarioRepository.class
 com\example\demo\Services\LibroService.class
 com\example\demo\Repositories\UploadRepository.class
 com\example\demo\Services\AutorService.class
+com\example\demo\DTO\UploadDTO.class
 com\example\demo\Services\UsuarioService.class
 com\example\demo\Repositories\AutorRepository.class
 com\example\demo\Models\Libro.class
+com\example\demo\Controllers\UploadController.class
 com\example\demo\Controllers\AutorController.class
 com\example\demo\DTO\LibroDTO.class
 com\example\demo\Controllers\UsuarioController.class
