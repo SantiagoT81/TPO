@@ -26,6 +26,7 @@ public class Libro {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaCreacion;
     private String descripcion;
+    private String urlPortada;
 
     //Puede tener uno o más autores
     @ManyToMany(mappedBy = "libros")

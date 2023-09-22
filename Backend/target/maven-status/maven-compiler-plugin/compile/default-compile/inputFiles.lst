@@ -1,8 +1,12 @@
+C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Controllers\UsuarioController.java
+C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Repositories\UsuarioRepository.java
+C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Services\UsuarioService.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\DTO\UsuarioDTO.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Models\Upload.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Services\AutorService.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Models\Autor.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Repositories\LibroRepository.java
+C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Repositories\UploadRepository.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Controllers\LibroController.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Repositories\AutorRepository.java
 C:\Users\Santiago\Desktop\TPO\Backend\src\main\java\com\example\demo\Services\LibroService.java

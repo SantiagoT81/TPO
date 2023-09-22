@@ -22,6 +22,7 @@ public class Upload {
     private Integer rate;
     //Texto de la reseña
     private String descripcion;
+    private String urlImagenPublicacion;
     @ManyToOne
     @JoinColumn(name="usuario_id")
     private Usuario usuario;

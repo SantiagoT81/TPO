@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.DTO.AutorDTO;
+import com.example.demo.DTO.LibroDTO;
 import com.example.demo.Models.Autor;
 import com.example.demo.Models.Libro;
 import com.example.demo.Services.AutorService;
@@ -24,10 +25,9 @@ public class AutorController {
     }
 
     @GetMapping("/{id}")
-    public Autor getLibroById(@PathVariable int id){
+    public Autor getAutorById(@PathVariable int id){
         return as.getById(id);
     }
-
     @GetMapping("/nombre/{nombre}")
     public Autor getByNombre(@PathVariable String nombre){
         return as.getByNombre(nombre);
@@ -38,8 +38,10 @@ public class AutorController {
         return as.getByApellido(apellido);
     }
 
-    @GetMapping("/descripcion/{descripcion}")
-    public Autor getByDescripcion(@PathVariable String descripcion){return as.getByDescripcion(descripcion);}
+    @GetMapping("/libros/{id}")
+    public List<LibroDTO> getAutorLibros(@PathVariable Integer id){
+        return as.getLibros(id);
+    }
 
 
     @PostMapping("/agregar")

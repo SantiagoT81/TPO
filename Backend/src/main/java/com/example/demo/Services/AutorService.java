@@ -33,7 +33,6 @@ public class AutorService {
 
     public Autor getByApellido(String apellido){return ar.findByApellido(apellido);}
 
-    public Autor getByDescripcion(String Descripcion){return ar.findByDescripcion(Descripcion);}
 
     public Autor getById(int id){
         return ar.findById(id).orElse(null);
