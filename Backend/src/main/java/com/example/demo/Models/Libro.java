@@ -1,11 +1,13 @@
 package com.example.demo.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +20,11 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
+    //Fecha en la que se agregó a la DB
     private Date fechaAgregado;
+    //Fecha en la que se publicó el libro
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaCreacion;
     private String descripcion;
 
     //Puede tener uno o más autores

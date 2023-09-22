@@ -1,11 +1,13 @@
 package com.example.demo.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,6 +21,8 @@ public class Autor {
     private String nombre;
     private String apellido;
     private String descripcion;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate cumpleanios;
     //Tiene muchos libros
     @ManyToMany
     @JoinTable(

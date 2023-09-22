@@ -18,6 +18,8 @@ public class Usuario {
     private Integer id;
     private String username;
     private String password;
+    private String email;
+
 
     @OneToMany(mappedBy = "usuario")
     private List<Upload> uploads;

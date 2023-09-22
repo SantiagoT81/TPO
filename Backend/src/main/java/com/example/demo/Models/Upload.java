@@ -18,7 +18,10 @@ public class Upload {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date fechaCreacion;
+    //Puntaje de la publicación en cuanto al libro (1-5)
     private Integer rate;
+    //Texto de la reseña
+    private String descripcion;
     @ManyToOne
     @JoinColumn(name="usuario_id")
     private Usuario usuario;

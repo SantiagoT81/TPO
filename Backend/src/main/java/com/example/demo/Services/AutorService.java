@@ -1,5 +1,7 @@
 package com.example.demo.Services;
 
+import com.example.demo.DTO.AutorDTO;
+import com.example.demo.DTO.LibroDTO;
 import com.example.demo.Models.Autor;
 import com.example.demo.Models.Libro;
 import com.example.demo.Repositories.AutorRepository;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 public class AutorService {
     @Autowired
     private AutorRepository ar;
+    private final ModelMapper mm = new ModelMapper();
     public AutorService(AutorRepository ar){
         this.ar = ar;
     }
@@ -36,14 +40,17 @@ public class AutorService {
     }
 
 
+    public Autor getByNombreApellido(String nombre, String apellido){
+        return ar.findByNombreApellido(nombre, apellido);
+    }
     public ResponseEntity add(Autor a){
         try{
-            Autor nombreExistente = getByNombre(a.getNombre());
-            Autor apellidoExistente = getByApellido(a.getApellido());
+            Autor autorExistente = getByNombreApellido(a.getNombre(), a.getApellido());
 
-            if(nombreExistente != null || apellidoExistente != null){
+            if(autorExistente != null){
                 return ResponseEntity.status(CONFLICT).body("autor preexistente");
             }
+            ar.save(a);
             return ResponseEntity.status(CREATED).body(a);
         }catch(Error e){
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(e);
@@ -51,21 +58,26 @@ public class AutorService {
     }
 
     public ResponseEntity update(Autor a, Integer id){
-        Autor autor = getById(id);
-        if(autor != null){
-            if(a.getNombre() != null){
-                autor.setNombre(a.getNombre());
+        try{
+            Autor autor = getById(id);
+            if(autor != null){
+                if(a.getNombre() != null){
+                    autor.setNombre(a.getNombre());
+                }
+                if(a.getApellido() != null){
+                    autor.setApellido(a.getApellido());
+                }
+                if(a.getDescripcion() != null){
+                    autor.setDescripcion(a.getDescripcion());
+                }
+                ar.save(autor);
+                return ResponseEntity.status(OK).body(autor);
             }
-            if(a.getApellido() != null){
-                autor.setApellido(a.getApellido());
-            }
-            if(a.getDescripcion() != null){
-                autor.setDescripcion(a.getDescripcion());
-            }
-            ar.save(autor);
-            return ResponseEntity.status(OK).body(autor);
+            return ResponseEntity.status(NOT_FOUND).build();
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.status(NOT_FOUND).build();
+
     }
 
 
@@ -78,4 +90,17 @@ public class AutorService {
         }
     }
 
+    public List<LibroDTO> getLibros(Integer idAutor){
+        List<LibroDTO> libroList = new ArrayList<>();
+        Autor autor = getById(idAutor);
+
+        if (autor != null) {
+            List<Libro> librosAutor = autor.getLibros();
+            for (Libro libro : librosAutor) {
+                LibroDTO libroDTO = mm.map(libro, LibroDTO.class);
+                libroList.add(libroDTO);
+            }
+        }
+        return libroList;
+    }
 }
