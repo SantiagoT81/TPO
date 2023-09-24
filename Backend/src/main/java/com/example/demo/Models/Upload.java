@@ -27,11 +27,12 @@ public class Upload {
     private String urlImagenPublicacion;
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @JsonBackReference // Use this on the "many" side (to prevent circular reference)
+    //Prevenir referencia circular
+    @JsonBackReference
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "libro_id")
-    @JsonBackReference(value = "upload-libro") // Use this on the "many" side (to prevent circular reference)
+    @JsonBackReference(value = "upload-libro")
     private Libro libro;
 }

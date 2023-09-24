@@ -24,8 +24,8 @@ public class Usuario {
     private String email;
     private String profilePic;
 
-    @OneToMany(mappedBy = "usuario")
-    @JsonManagedReference // Use this on the "one" side
+    //orphanRemoval + CascadeType.ALL propagan los cambios a las publicaciones hechas por el mismo.
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Upload> uploads;
-
 }

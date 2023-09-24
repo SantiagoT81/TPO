@@ -33,7 +33,7 @@ public class Libro {
     @ManyToMany(mappedBy = "libros")
     private List<Autor> autores;
     @OneToMany(mappedBy = "libro")
-    @JsonManagedReference(value = "upload-libro") // Use this on the "one" side
+    @JsonManagedReference(value = "upload-libro")
     private List<Upload> uploads;
 
 }

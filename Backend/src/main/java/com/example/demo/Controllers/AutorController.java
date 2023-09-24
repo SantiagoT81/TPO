@@ -13,10 +13,6 @@ import java.util.List;
 @RequestMapping("/autores")
 @RestController
 public class AutorController {
-    //Hacer CRUD de autor
-    //Evitar eliminar autor si tiene libros escritos
-
-
     @Autowired
     private AutorService as;
     @GetMapping("")
