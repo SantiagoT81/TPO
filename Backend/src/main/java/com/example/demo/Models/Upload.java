@@ -1,6 +1,8 @@
 package com.example.demo.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +26,12 @@ public class Upload {
     private String descripcion;
     private String urlImagenPublicacion;
     @ManyToOne
-    @JoinColumn(name="usuario_id")
+    @JoinColumn(name = "usuario_id")
+    @JsonBackReference // Use this on the "many" side (to prevent circular reference)
     private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name = "libro_id")
+    @JsonBackReference(value = "upload-libro") // Use this on the "many" side (to prevent circular reference)
     private Libro libro;
-
 }

@@ -1,6 +1,7 @@
 package com.example.demo.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,7 @@ public class Usuario {
     private String profilePic;
 
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnore
+    @JsonManagedReference // Use this on the "one" side
     private List<Upload> uploads;
 
 }

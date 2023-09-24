@@ -12,5 +12,5 @@ public class UsuarioDTO {
     @Id
     private Integer id;
     private String username;
-    private String emaiL;
+    private String email;
 }

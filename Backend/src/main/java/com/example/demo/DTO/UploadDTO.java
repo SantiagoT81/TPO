@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class UploadDTO {
     @Id
+    private Integer id;
     private Date fechaCreacion;
     private Integer rate;
     private String descripcion;

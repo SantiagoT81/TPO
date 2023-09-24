@@ -21,6 +21,8 @@ import static org.springframework.http.HttpStatus.*;
 public class LibroService {
     @Autowired
     private LibroRepository lr;
+    @Autowired
+    private AutorRepository ar;
     private final ModelMapper mm = new ModelMapper();
     public LibroService(LibroRepository lr){
         this.lr = lr;
@@ -47,6 +49,22 @@ public class LibroService {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(e);
         }
 
+
+    }
+    public ResponseEntity addAutor(Integer idLibro, Integer idAutor){
+        try{
+            Autor a = ar.findById(idAutor).orElse(null);
+            Libro l = getById(idLibro);
+            if(a != null && l != null){
+                a.getLibros().add(l);
+                l.getAutores().add(a);
+                lr.save(l);
+                return ResponseEntity.status(OK).body(l);
+            }
+            return ResponseEntity.status(CONFLICT).body("El autor o el libro no existe");
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("Ocurrió un error al agregar el autor al libro");
+        }
 
     }
     public ResponseEntity update(Libro l, Integer id){

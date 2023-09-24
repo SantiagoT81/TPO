@@ -37,6 +37,11 @@ public class LibroController {
     public ResponseEntity add(@RequestBody Libro l){
         return ls.add(l);
     }
+
+    @PostMapping("{idLibro}/agregarAutor/{idAutor}")
+    public ResponseEntity addAutor(@PathVariable(value = "idLibro") Integer idLibro, @PathVariable(value = "idAutor") Integer idAutor){
+        return ls.addAutor(idLibro, idAutor);
+    }
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity delete(@PathVariable int id){
         return ls.delete(id);

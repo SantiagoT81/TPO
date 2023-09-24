@@ -15,6 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -49,8 +51,15 @@ public class UsuarioService {
             if(usuarioExistente != null){
                 return ResponseEntity.status(CONFLICT).body("Usuario preexistente");
             }
-            ur.save(u);
-            return ResponseEntity.status(CREATED).body(u);
+            String pass = u.getPassword();
+            Pattern patron = Pattern.compile(".*[a-zA-Z].*[0-9].*");
+            Matcher matcher = patron.matcher(pass);
+            if(matcher.matches()){
+                ur.save(u);
+                return ResponseEntity.status(CREATED).body(u);
+            }
+            return ResponseEntity.status(CONFLICT).body("La contraseña debe ser alfanumérica");
+
         }catch(Error e){
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(e);
         }
