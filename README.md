@@ -1,3 +1,7 @@
 # TPO
-
-Base de datos pública con sistema de usuarios y reseñas de libros. 
+Gestión de publicaciones con puntuación de usuarios sobre un libro en concreto.
+-ABM de:
+*Usuario
+*Publicación
+*Libro
+*Autor
