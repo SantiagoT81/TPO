@@ -39,7 +39,6 @@ public class AutorController {
         return as.getLibros(id);
     }
 
-
     @PostMapping("/agregar")
     public ResponseEntity add(@RequestBody Autor a){
         return as.add(a);
