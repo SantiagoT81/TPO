@@ -35,14 +35,14 @@ public class UploadService {
         this.ur = ur;
     }
 
-    public List<UploadDTO> getAll(){
+    public ResponseEntity<?> getAll(){
         try{
             List<UploadDTO> uploadDTOS = new ArrayList<>();
             List<Upload> uploads = ur.findAll();
             for(Upload u: uploads){
                 uploadDTOS.add(mm.map(u, UploadDTO.class));
             }
-            return uploadDTOS;
+            return ResponseEntity.status(OK).body(uploadDTOS);
         }catch (Error e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al traer la lista de publicaciones");
         }
@@ -51,7 +51,7 @@ public class UploadService {
         return ur.findById(id).orElse(null);
     }
 
-    public ResponseEntity add(Upload u){
+    public ResponseEntity<?> add(Upload u){
         try{
             u.setFechaCreacion(new Date());
             //Validar existencia usuario
@@ -63,7 +63,7 @@ public class UploadService {
         }
     }
 
-    public ResponseEntity delete(Integer id){
+    public ResponseEntity<?>delete(Integer id){
         try{
             Upload u = ur.findById(id).orElse(null);
             if(u != null){
@@ -78,7 +78,7 @@ public class UploadService {
         }
     }
 
-    public ResponseEntity update(Upload u, Integer id){
+    public ResponseEntity<?> update(Upload u, Integer id){
         Upload upload = getById(id);
         if(upload != null){
             if(u.getDescripcion() != null){

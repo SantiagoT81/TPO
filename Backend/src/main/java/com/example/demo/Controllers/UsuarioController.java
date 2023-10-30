@@ -16,19 +16,19 @@ public class UsuarioController {
     UsuarioService us;
 
     @GetMapping("")
-    public List<UsuarioDTO> getAll(){
+    public ResponseEntity<?> getAll(){
         return us.getUsuarios();
     }
     @PostMapping("/agregar")
-    public ResponseEntity add(@RequestBody Usuario u){
+    public ResponseEntity<?> add(@RequestBody Usuario u){
         return us.add(u);
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity delete(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         return us.delete(id);
     }
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity update(@PathVariable Integer id, @RequestBody Usuario u){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Usuario u){
         return us.update(u, id);
     }
 }

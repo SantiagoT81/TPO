@@ -39,12 +39,21 @@ public class AutorService {
     }
 
 
-    public Autor getByNombreApellido(String nombre, String apellido){
-        return ar.findByNombreApellido(nombre, apellido);
-    }
-    public ResponseEntity add(Autor a){
+    public ResponseEntity<?> getByNombreApellido(String nombre, String apellido){
         try{
-            Autor autorExistente = getByNombreApellido(a.getNombre(), a.getApellido());
+            Autor a = ar.findByNombreApellido(nombre, apellido);
+            if(a != null){
+                return ResponseEntity.status(CONFLICT).body("No se encontró el autor");
+            }else{
+                return ResponseEntity.status(OK).body(a);
+            }
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+    public ResponseEntity<?> add(Autor a){
+        try{
+            Autor autorExistente = ar.findByNombreApellido(a.getNombre(), a.getApellido());
 
             if(autorExistente != null){
                 return ResponseEntity.status(CONFLICT).body("autor preexistente");
@@ -56,7 +65,7 @@ public class AutorService {
         }
     }
 
-    public ResponseEntity update(Autor a, Integer id){
+    public ResponseEntity<?> update(Autor a, Integer id){
         try{
             Autor autor = getById(id);
             if(autor != null){
@@ -80,7 +89,7 @@ public class AutorService {
     }
 
 
-    public ResponseEntity delete(Integer id){
+    public ResponseEntity<?> delete(Integer id){
         try{
             ar.deleteById(id);
             return ResponseEntity.status(OK).build();
@@ -89,17 +98,22 @@ public class AutorService {
         }
     }
 
-    public List<LibroDTO> getLibros(Integer idAutor){
-        List<LibroDTO> libroList = new ArrayList<>();
-        Autor autor = getById(idAutor);
+    public ResponseEntity<?> getLibros(Integer idAutor){
+        try{
+            List<LibroDTO> libroList = new ArrayList<>();
+            Autor autor = getById(idAutor);
 
-        if (autor != null) {
-            List<Libro> librosAutor = autor.getLibros();
-            for (Libro libro : librosAutor) {
-                LibroDTO libroDTO = mm.map(libro, LibroDTO.class);
-                libroList.add(libroDTO);
+            if (autor != null) {
+                List<Libro> librosAutor = autor.getLibros();
+                for (Libro libro : librosAutor) {
+                    LibroDTO libroDTO = mm.map(libro, LibroDTO.class);
+                    libroList.add(libroDTO);
+                }
             }
+            return ResponseEntity.status(OK).body(libroList);
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se encontraron libros de este autor.");
         }
-        return libroList;
+
     }
 }

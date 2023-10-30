@@ -32,20 +32,20 @@ public class UsuarioService {
         return ur.findById(id).orElse(null);
     }
 
-    public List<UsuarioDTO> getUsuarios(){
+    public ResponseEntity<?> getUsuarios(){
         try{
             List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
             List<Usuario> usuarios = ur.findAll();
             for(Usuario u: usuarios){
                 usuarioDTOS.add(mm.map(u, UsuarioDTO.class));
             }
-            return usuarioDTOS;
+            return ResponseEntity.status(OK).body(usuarioDTOS);
         }catch(Error e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al traer la lista de usuarios");
         }
 
     }
-    public ResponseEntity add(Usuario u){
+    public ResponseEntity<?> add(Usuario u){
         try{
             Usuario usuarioExistente = ur.findByUsername(u.getUsername());
             if(usuarioExistente != null){
@@ -65,7 +65,7 @@ public class UsuarioService {
         }
     }
 
-    public ResponseEntity delete(Integer id){
+    public ResponseEntity<?> delete(Integer id){
         try{
             if(findByID(id) == null){
                 return ResponseEntity.status(NOT_FOUND).body("No se encontró el usuario a eliminar");
@@ -77,7 +77,7 @@ public class UsuarioService {
         }
     }
 
-    public ResponseEntity update(Usuario u, Integer id){
+    public ResponseEntity<?> update(Usuario u, Integer id){
         try{
             Usuario usuario = findByID(id);
             if(usuario != null){

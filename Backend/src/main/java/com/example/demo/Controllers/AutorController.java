@@ -35,21 +35,21 @@ public class AutorController {
     }
 
     @GetMapping("/libros/{id}")
-    public List<LibroDTO> getAutorLibros(@PathVariable Integer id){
+    public ResponseEntity<?> getAutorLibros(@PathVariable Integer id){
         return as.getLibros(id);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity add(@RequestBody Autor a){
+    public ResponseEntity<?> add(@RequestBody Autor a){
         return as.add(a);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id){
         return as.delete(id);
     }
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity update(@PathVariable Integer id, @RequestBody Autor a){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Autor a){
         return as.update(a, id);
     }
 

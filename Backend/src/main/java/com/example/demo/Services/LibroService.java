@@ -5,6 +5,7 @@ import com.example.demo.Models.Autor;
 import com.example.demo.Models.Libro;
 import com.example.demo.Repositories.AutorRepository;
 import com.example.demo.Repositories.LibroRepository;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class LibroService {
     public Libro getById(int id){
         return lr.findById(id).orElse(null);
     }
-    public ResponseEntity add(Libro l){
+    public ResponseEntity<?> add(Libro l){
         try{
             Libro libroExistente = getByTitle(l.getTitulo());
             if(libroExistente != null){
@@ -51,7 +52,7 @@ public class LibroService {
 
 
     }
-    public ResponseEntity addAutor(Integer idLibro, Integer idAutor){
+    public ResponseEntity<?> addAutor(Integer idLibro, Integer idAutor){
         try{
             Autor a = ar.findById(idAutor).orElse(null);
             Libro l = getById(idLibro);
@@ -67,7 +68,7 @@ public class LibroService {
         }
 
     }
-    public ResponseEntity update(Libro l, Integer id){
+    public ResponseEntity<?> update(Libro l, Integer id){
         Libro libro = getById(id);
         if(libro != null){
             if(l.getTitulo() != null){
@@ -81,7 +82,7 @@ public class LibroService {
         }
         return ResponseEntity.status(NOT_FOUND).build();
     }
-    public ResponseEntity delete(Integer id){
+    public ResponseEntity<?> delete(Integer id){
         try{
             lr.deleteById(id);
             return ResponseEntity.status(OK).build();
@@ -90,21 +91,26 @@ public class LibroService {
         }
     }
 
-    public List<AutorDTO> getAutores(Integer idLibro) {
-        List<AutorDTO> autorList = new ArrayList<>();
-        Libro libro = getById(idLibro);
+    public ResponseEntity<?> getAutores(Integer idLibro) {
+        try{
+            List<AutorDTO> autorList = new ArrayList<>();
+            Libro libro = getById(idLibro);
 
-        if (libro != null) {
-            List<Autor> autoresLibro = libro.getAutores();
-            //Por cada autor del libro buscado
-            for (Autor autor : autoresLibro) {
-                //Se mappea el autor a autorDTO
-                AutorDTO autorDTO = mm.map(autor, AutorDTO.class);
-                //Se agrega el DTO a la lista de autores
-                autorList.add(autorDTO);
+            if (libro != null) {
+                List<Autor> autoresLibro = libro.getAutores();
+                //Por cada autor del libro buscado
+                for (Autor autor : autoresLibro) {
+                    //Se mappea el autor a autorDTO
+                    AutorDTO autorDTO = mm.map(autor, AutorDTO.class);
+                    //Se agrega el DTO a la lista de autores
+                    autorList.add(autorDTO);
+                }
             }
+            return ResponseEntity.status(OK).body(autorList);
+        }catch (Error e){
+            return ResponseEntity.status(NOT_FOUND).body("No se encontraron autores para este libro");
         }
-        return autorList;
+
     }
 
 

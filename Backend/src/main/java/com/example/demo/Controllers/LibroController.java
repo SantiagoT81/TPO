@@ -30,26 +30,26 @@ public class LibroController {
         return ls.getByTitle(title);
     }
     @GetMapping("/autores/{id}")
-    public List<AutorDTO> getLibroAutores(@PathVariable Integer id){
+    public ResponseEntity<?> getLibroAutores(@PathVariable Integer id){
         return ls.getAutores(id);
     }
     @PostMapping("/agregar")
-    public ResponseEntity add(@RequestBody Libro l){
+    public ResponseEntity<?> add(@RequestBody Libro l){
         return ls.add(l);
     }
 
     @PostMapping("{idLibro}/agregarAutor/{idAutor}")
-    public ResponseEntity addAutor(@PathVariable(value = "idLibro") Integer idLibro, @PathVariable(value = "idAutor") Integer idAutor){
+    public ResponseEntity<?> addAutor(@PathVariable(value = "idLibro") Integer idLibro, @PathVariable(value = "idAutor") Integer idAutor){
         return ls.addAutor(idLibro, idAutor);
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id){
         return ls.delete(id);
     }
 
     //Usar  @RequestBody Map<String, String> mapa | en lugar de @RequestBody libro l ?
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity update(@PathVariable Integer id, @RequestBody Libro l){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Libro l){
         return ls.update(l, id);
     }
 }
