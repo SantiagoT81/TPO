@@ -1,1 +1,17 @@
-<p>publicacion works!</p>
+<div *ngFor="let p of libros"> 
+    <div class="card mb-3 text" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="..." class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary" (click)="ejemplo(p.id)">Primary</button>
+              <h5 class="card-title">{{p.titulo}}</h5>
+              <p class="card-text">{{p.descripcion}} </p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
