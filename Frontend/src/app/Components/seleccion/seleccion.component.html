@@ -1,0 +1,4 @@
+<select class="form-select" aria-label="Seleccion">
+    <option value="">Seleccione un libro...</option>
+    <option *ngFor="let p of libros" [value]="p.id"> {{p.titulo}}</option>
+</select>

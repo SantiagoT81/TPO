@@ -10,6 +10,8 @@ import { HomeComponent } from './views/home/home.component';
 import { NavComponent } from './Components/nav/nav.component';
 import { AgregarComponent } from './views/agregar/agregar.component';
 import { FormularioPublicacionComponent } from './Components/formulario-publicacion/formulario-publicacion.component';
+import { PuntajeComponent } from './Components/puntaje/puntaje.component';
+import { SeleccionComponent } from './Components/seleccion/seleccion.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FormularioPublicacionComponent } from './Components/formulario-publicac
     NavComponent,
     AgregarComponent,
     FormularioPublicacionComponent,
+    PuntajeComponent,
+    SeleccionComponent,
     
   ],
   imports: [
