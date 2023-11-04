@@ -12,6 +12,11 @@ import { AgregarComponent } from './views/agregar/agregar.component';
 import { FormularioPublicacionComponent } from './Components/formulario-publicacion/formulario-publicacion.component';
 import { PuntajeComponent } from './Components/puntaje/puntaje.component';
 import { SeleccionComponent } from './Components/seleccion/seleccion.component';
+import { FormsModule } from '@angular/forms';
+import { TablaPublicacionComponent } from './Components/tabla-publicacion/tabla-publicacion.component';
+import { DescripcionPublicacionComponent } from './Components/descripcion-publicacion/descripcion-publicacion.component';
+import { NotificacionComponent } from './Components/notificacion/notificacion.component';
+import { ActualizadorPublicacionComponent } from './Components/actualizador-publicacion/actualizador-publicacion.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +28,18 @@ import { SeleccionComponent } from './Components/seleccion/seleccion.component';
     FormularioPublicacionComponent,
     PuntajeComponent,
     SeleccionComponent,
+    TablaPublicacionComponent,
+    DescripcionPublicacionComponent,
+    NotificacionComponent,
+    ActualizadorPublicacionComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

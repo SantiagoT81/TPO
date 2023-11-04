@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import com.example.demo.DTO.UploadDTO;
+import com.example.demo.DTO.UsuarioDTO;
 import com.example.demo.Models.Libro;
 import com.example.demo.Models.Upload;
 import com.example.demo.Repositories.LibroRepository;
@@ -40,9 +41,14 @@ public class UploadService {
             List<UploadDTO> uploadDTOS = new ArrayList<>();
             List<Upload> uploads = ur.findAll();
             for(Upload u: uploads){
-                uploadDTOS.add(mm.map(u, UploadDTO.class));
+                UploadDTO ud = mm.map(u, UploadDTO.class);
+                ud.setU(mm.map(u.getUsuario(), UsuarioDTO.class));
+                ud.setL(u.getLibro());
+                uploadDTOS.add(ud);
+
             }
             return ResponseEntity.status(OK).body(uploadDTOS);
+            //return ResponseEntity.status(OK).body(ur.findAll());
         }catch (Error e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al traer la lista de publicaciones");
         }
@@ -50,16 +56,23 @@ public class UploadService {
     public Upload getById(Integer id){
         return ur.findById(id).orElse(null);
     }
+    public ResponseEntity<?> getByIdSinDTO(Integer id){
+        return ResponseEntity.status(OK).body(ur.findById(id));
+    }
 
     public ResponseEntity<?> add(Upload u){
         try{
+            if(u.getTitulo().isEmpty() || u.getRate() == 0 || u.getDescripcion().isEmpty()){
+                return ResponseEntity.status(BAD_REQUEST).build();
+            }
             u.setFechaCreacion(new Date());
             //Validar existencia usuario
             //Validar existencia libro
+
             ur.save(u);
             return ResponseEntity.status(CREATED).body(u);
         }catch (Error e){
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se pudo crear la publicación");
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -68,7 +81,7 @@ public class UploadService {
             Upload u = ur.findById(id).orElse(null);
             if(u != null){
                 ur.delete(u);
-                return ResponseEntity.status(OK).body("Publicación eliminada exitosamente");
+                return ResponseEntity.status(OK).build();
             }
             return ResponseEntity.status(CONFLICT).body("Publicación no encontrada");
         }catch (Error e){
@@ -79,17 +92,24 @@ public class UploadService {
     }
 
     public ResponseEntity<?> update(Upload u, Integer id){
-        Upload upload = getById(id);
-        if(upload != null){
-            if(u.getDescripcion() != null){
-                upload.setDescripcion(u.getDescripcion());
+        try{
+            System.out.println(u);
+            System.out.println(id);
+            Upload upload = getById(id);
+            if(upload != null){
+                if(u.getDescripcion() != null){
+                    upload.setDescripcion(u.getDescripcion());
+                }
+                if(u.getTitulo() != null){
+                    upload.setTitulo(u.getTitulo());
+                }
+                ur.save(upload);
+                return ResponseEntity.status(OK).body(upload);
             }
-            if(u.getRate() != null){
-                upload.setRate(u.getRate());
-            }
-            ur.save(upload);
-            return ResponseEntity.status(OK).body(upload);
+            return ResponseEntity.status(NOT_FOUND).build();
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.status(NOT_FOUND).build();
+
     }
 }

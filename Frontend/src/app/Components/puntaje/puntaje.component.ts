@@ -7,7 +7,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./puntaje.component.css']
 })
 export class PuntajeComponent {
-  selectedRating = 0;
+  @Input() selectedRating!: number;
   @Input() seleccionable!: boolean;
 
   constructor(config: NgbRatingConfig){

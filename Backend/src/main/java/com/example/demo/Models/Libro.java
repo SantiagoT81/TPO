@@ -1,5 +1,6 @@
 package com.example.demo.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,8 +33,10 @@ public class Libro {
     //Puede tener uno o más autores
     @ManyToMany(mappedBy = "libros")
     private List<Autor> autores;
+
     @OneToMany(mappedBy = "libro")
-    @JsonManagedReference(value = "upload-libro")
+    @JsonManagedReference
+    @JsonIgnore
     private List<Upload> uploads;
 
 }

@@ -1,0 +1,32 @@
+<table class="table table-hover mx-auto" style="max-width: 60%;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Título</th>
+        <th scope="col">Libro</th>
+        <th scope="col">Puntuación</th>
+        <th scope="col">Publicado por</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let publicacion of publicaciones">
+        
+        <th scope="row">{{publicacion.id}} </th>
+        <td scope="row">{{publicacion.titulo}}  </td>
+        <td scope="row">{{publicacion.l.titulo}} </td>
+        <td scope="row"> <app-puntaje [seleccionable] = 'false' [selectedRating] = publicacion.rate >   </app-puntaje>  </td>
+        <td scope="row">{{publicacion.u.username}}  </td>
+        <td scope="row">{{publicacion.fechaCreacion}}  </td>
+        <td scope="row">
+          <div class="btn-group">
+            <app-descripcion-publicacion [texto] = publicacion.descripcion [titulo] = publicacion.titulo></app-descripcion-publicacion>
+            <button type="button" class="btn btn-danger" (click)="deleteOne(publicacion)">Eliminar</button>
+            <app-actualizador-publicacion [editable] = 'publicacion'></app-actualizador-publicacion>
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>

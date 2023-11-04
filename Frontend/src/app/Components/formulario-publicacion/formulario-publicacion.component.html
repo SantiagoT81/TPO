@@ -1,24 +1,30 @@
-<form class="container text-center">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Titulo de la publicación</label>
-      <div class="mx-auto" style="max-width: 50%;"> 
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriba el título de la publicación...">
-      </div>
+<form class="container text-center" #formPublicacion="ngForm" (ngSubmit)="modoPublicar ? enviar(formPublicacion.value) : update(formPublicacion.value)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Titulo de la publicación</label>
+    <div class="mx-auto" style="max-width: 50%">
+      <input [ngModel]="modoPublicar ? '' : publicacionEditable.titulo" name="titulo" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriba el título de la publicación...">
     </div>
-    <label for="libros">Libro</label>
-    <div class="form-group mx-auto" id="libros" style="max-width: 50%;">
-        <app-seleccion></app-seleccion>
+  </div>
+  <label for="libros">Libro</label>
+  <div class="form-group mx-auto" id="libros" style="max-width: 50%">
+    <select class="form-select" aria-label="Seleccion" name="libro" [ngModel]="modoPublicar ? '' : publicacionEditable.libro">
+      <option value="">Seleccione un libro...</option>
+      <option *ngFor="let p of libros" [value]="p.id">{{ p.titulo }}</option>
+    </select>
+  </div>
+  <div class="form-group mx-auto" style="max-width: 50%">
+    <label for="resenia">Opinión</label>
+    <textarea [ngModel]="modoPublicar ? '' : publicacionEditable.descripcion" name="descripcion" class="form-control" rows="3" id="resenia" placeholder="Escriba su opinión..."></textarea>
+  </div>
+  <div class="form-group">
+    <div class="puntaje">
+      <p style="font-size: 16px;">Puntuación...</p>
+      <ngb-rating [(rate)]="selectedRating" [max]="5" id="puntuacion"></ngb-rating>
     </div>
-    <div class="form-group mx-auto" style="max-width: 50%;">
-        <label for="resenia">Opinión</label>
-        <textarea class="form-control" rows="3" id="resenia" placeholder="Escriba su opinión..."></textarea>
-    </div>
-    <div class="form-group">
-        <app-puntaje id="puntuacion" [seleccionable]="true"></app-puntaje>
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  <!-- Mostrar toast de éxito/error -->
+  <button type="submit" class="btn btn-dark" (click)="showToast = true" *ngIf="modoPublicar">Publicar</button>
+  <button type="submit" class="btn btn-dark" (click)="showToast = true" *ngIf="!modoPublicar">Editar</button>
 </form>
+
   

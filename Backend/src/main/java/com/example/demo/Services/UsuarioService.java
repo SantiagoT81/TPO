@@ -4,6 +4,7 @@ import com.example.demo.DTO.LibroDTO;
 import com.example.demo.DTO.UsuarioDTO;
 import com.example.demo.Models.Autor;
 import com.example.demo.Models.Libro;
+import com.example.demo.Models.Upload;
 import com.example.demo.Models.Usuario;
 import com.example.demo.Repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
@@ -30,6 +31,9 @@ public class UsuarioService {
     }
     public Usuario findByID(int id){
         return ur.findById(id).orElse(null);
+    }
+    public  ResponseEntity<UsuarioDTO> getById(Integer id){
+        return ResponseEntity.status(OK).body(mm.map(findByID(id), UsuarioDTO.class));
     }
 
     public ResponseEntity<?> getUsuarios(){

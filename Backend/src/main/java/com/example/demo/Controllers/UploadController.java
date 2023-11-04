@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/publicaciones")
 @RestController
 public class UploadController {
@@ -20,6 +22,10 @@ public class UploadController {
     public ResponseEntity<?> getAll(){
         return ups.getAll();
     }
+
+    //prueba
+    @GetMapping("{id}")
+    public ResponseEntity<?> getById(@PathVariable Integer id) {return ups.getByIdSinDTO(id);}
     @PostMapping("/agregar")
     public ResponseEntity<?> add(@RequestBody Upload u){
         return ups.add(u);

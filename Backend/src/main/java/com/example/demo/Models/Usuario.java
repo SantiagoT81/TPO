@@ -1,5 +1,6 @@
 package com.example.demo.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -26,6 +27,7 @@ public class Usuario {
 
     //orphanRemoval + CascadeType.ALL propagan los cambios a las publicaciones hechas por el mismo.
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    //managed
+    @JsonBackReference
     private List<Upload> uploads;
 }

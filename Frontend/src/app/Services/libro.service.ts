@@ -14,6 +14,6 @@ export class LibroService {
     return this.http.get(this.url);
   }
   post(libro:Libro): Observable<any>{
-    return this.http.post("", libro)
+    return this.http.post(this.url + "/agregar", libro)
   }
 }

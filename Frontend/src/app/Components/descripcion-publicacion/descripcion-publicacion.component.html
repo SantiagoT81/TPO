@@ -1,0 +1,18 @@
+<ng-template #longContent let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">
+            ❝{{titulo}}❞
+        </h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        {{texto}}
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-dark" (click)="openScrollableContent(longContent)">
+	Detalles
+</button>

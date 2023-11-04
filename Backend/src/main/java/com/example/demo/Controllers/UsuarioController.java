@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/usuarios")
 @RestController
 public class UsuarioController {
@@ -18,6 +18,11 @@ public class UsuarioController {
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         return us.getUsuarios();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getById(@PathVariable Integer id){
+        return us.getById(id);
     }
     @PostMapping("/agregar")
     public ResponseEntity<?> add(@RequestBody Usuario u){
