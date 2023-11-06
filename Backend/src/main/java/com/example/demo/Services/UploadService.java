@@ -67,7 +67,9 @@ public class UploadService {
 
     public ResponseEntity<?> add(Upload u){
         try{
-
+            if(u.getTitulo().isEmpty() || u.getRate() == 0 || u.getDescripcion().isEmpty()){
+                return ResponseEntity.status(BAD_REQUEST).build();
+            }
             u.setFechaCreacion(new Date());
             //Validar existencia usuario
             //Validar existencia libro
