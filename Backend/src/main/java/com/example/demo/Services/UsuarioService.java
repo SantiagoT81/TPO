@@ -55,7 +55,7 @@ public class UsuarioService {
             if(usuarioExistente != null){
                 return ResponseEntity.status(CONFLICT).body("Usuario preexistente");
             }
-            String pass = u.getPassword();
+            String pass = u.getPass();
             Pattern patron = Pattern.compile(".*[a-zA-Z].*[0-9].*");
             Matcher matcher = patron.matcher(pass);
             if(matcher.matches()){

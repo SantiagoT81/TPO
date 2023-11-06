@@ -32,13 +32,14 @@ export class FormularioPublicacionComponent {
       "descripcion": forma.descripcion,
       "titulo": forma.titulo,
       "usuario": {
-          "id": 2
+          "id": 1
       },
       "libro": {
           "id": forma.libro
       }
     });
-    if(publi.descripcion == "" || publi.titulo == ""){
+    if(publi.descripcion == "" || publi.titulo == "" || publi.rate == 0){
+      console.log(publi)
       window.alert("Por favor rellene todos los campos.")
       return;
     }

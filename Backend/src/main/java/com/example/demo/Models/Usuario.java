@@ -21,7 +21,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
-    private String password;
+    private String pass;
     private String email;
     private String profilePic;
 
