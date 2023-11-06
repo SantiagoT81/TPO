@@ -16,12 +16,12 @@
     <label for="resenia">Opinión</label>
     <textarea [ngModel]="modoPublicar ? '' : publicacionEditable.descripcion" name="descripcion" class="form-control" rows="3" id="resenia" placeholder="Escriba su opinión..."></textarea>
   </div>
-  <div class="form-group">
-    <div class="puntaje">
-      <p style="font-size: 16px;">Puntuación...</p>
-      <ngb-rating [(rate)]="selectedRating" [max]="5" id="puntuacion"></ngb-rating>
-    </div>
+<div class="form-group">
+  <div class="puntaje">
+    <p style="font-size: 16px;">Puntuación...</p>
+    <ngb-rating [(rate)]="modoPublicar ? selectedRating : publicacionEditable.rate" [max]="5" id="puntuacion"></ngb-rating>
   </div>
+</div>
   <!-- Mostrar toast de éxito/error -->
   <button type="submit" class="btn btn-dark" (click)="showToast = true" *ngIf="modoPublicar">Publicar</button>
   <button type="submit" class="btn btn-dark" (click)="showToast = true" *ngIf="!modoPublicar">Editar</button>

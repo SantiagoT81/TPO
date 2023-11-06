@@ -17,6 +17,7 @@ import { TablaPublicacionComponent } from './Components/tabla-publicacion/tabla-
 import { DescripcionPublicacionComponent } from './Components/descripcion-publicacion/descripcion-publicacion.component';
 import { NotificacionComponent } from './Components/notificacion/notificacion.component';
 import { ActualizadorPublicacionComponent } from './Components/actualizador-publicacion/actualizador-publicacion.component';
+import { CargarLibroComponent } from './Components/cargar-libro/cargar-libro.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ActualizadorPublicacionComponent } from './Components/actualizador-publ
     DescripcionPublicacionComponent,
     NotificacionComponent,
     ActualizadorPublicacionComponent,
+    CargarLibroComponent,
     
   ],
   imports: [

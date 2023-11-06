@@ -51,9 +51,10 @@ export class FormularioPublicacionComponent {
     const publi: any = ({
       "id": this.publicacionEditable.id,
       "descripcion": forma.descripcion,
-      "titulo": forma.titulo
+      "titulo": forma.titulo,
+      "rate": this.publicacionEditable.rate
     });
-    window.alert(this.publicacionEditable.id)
+    window.alert(this.publicacionEditable.rate)
     this.uploadService.update(publi, publi.id).subscribe((data) => {
       console.log(data)
     })

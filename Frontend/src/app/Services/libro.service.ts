@@ -13,7 +13,7 @@ export class LibroService {
   getAll(): Observable<any>{
     return this.http.get(this.url);
   }
-  post(libro:Libro): Observable<any>{
+  post(libro:any): Observable<any>{
     return this.http.post(this.url + "/agregar", libro)
   }
 }

@@ -57,7 +57,12 @@ public class UploadService {
         return ur.findById(id).orElse(null);
     }
     public ResponseEntity<?> getByIdSinDTO(Integer id){
-        return ResponseEntity.status(OK).body(ur.findById(id));
+        try{
+            return ResponseEntity.status(OK).body(ur.findById(id));
+        }catch (Error e){
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
     public ResponseEntity<?> add(Upload u){
@@ -102,6 +107,9 @@ public class UploadService {
                 }
                 if(u.getTitulo() != null){
                     upload.setTitulo(u.getTitulo());
+                }
+                if(u.getRate() != null){
+                    upload.setRate(u.getRate());
                 }
                 ur.save(upload);
                 return ResponseEntity.status(OK).body(upload);

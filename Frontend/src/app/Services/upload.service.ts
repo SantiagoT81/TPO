@@ -20,6 +20,6 @@ export class UploadService {
   }
 
   update(upload: any, uploadId:number): Observable<any>{
-    return this.http.patch(this.url + "/actualizar/" + 45, upload)
+    return this.http.patch(this.url + "/actualizar/" + uploadId, upload)
   }
 }
