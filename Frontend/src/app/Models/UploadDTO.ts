@@ -1,20 +1,12 @@
+import { Libro } from "./Libro"
 import { Usuario } from "./Usuario"
 
 export class UploadDTO{
-    id: number = 0
+    id!: number
     fechaCreacion!: Date
-    rate: number = 0
-    descripcion: string = ""
-    titulo: string = ""
-    u!: {
-        id: 0
-        username: ""
-        email: ""
-    }
-    l!: {
-        id: 0
-        titulo: ""
-        descripcion: ""
-        fechaCreacion: ""
-    }
+    rate!: number 
+    descripcion!: string 
+    titulo!: string 
+    u!: Usuario
+    l!: Libro
 }

@@ -36,4 +36,9 @@ public class UsuarioController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Usuario u){
         return us.update(u, id);
     }
+
+    @GetMapping("/nombre/{username}")
+    public ResponseEntity<?> getByUsername(@PathVariable String username){
+        return us.findByUsername(username);
+    }
 }

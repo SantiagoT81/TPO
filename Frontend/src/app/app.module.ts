@@ -18,6 +18,7 @@ import { DescripcionPublicacionComponent } from './Components/descripcion-public
 import { NotificacionComponent } from './Components/notificacion/notificacion.component';
 import { ActualizadorPublicacionComponent } from './Components/actualizador-publicacion/actualizador-publicacion.component';
 import { CargarLibroComponent } from './Components/cargar-libro/cargar-libro.component';
+import { LoginSignupComponent } from './Components/login-signup/login-signup.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CargarLibroComponent } from './Components/cargar-libro/cargar-libro.com
     NotificacionComponent,
     ActualizadorPublicacionComponent,
     CargarLibroComponent,
+    LoginSignupComponent,
     
   ],
   imports: [

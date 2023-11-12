@@ -7,6 +7,7 @@ import com.example.demo.Models.Libro;
 import com.example.demo.Models.Upload;
 import com.example.demo.Models.Usuario;
 import com.example.demo.Repositories.UsuarioRepository;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,19 @@ public class UsuarioService {
         return ResponseEntity.status(OK).body(mm.map(findByID(id), UsuarioDTO.class));
     }
 
+    public ResponseEntity<?> findByUsername(String username) {
+        try {
+            Usuario usuario = ur.findByUsername(username);
+            if (usuario != null) {
+                return ResponseEntity.status(OK).body(mm.map(usuario, UsuarioDTO.class));
+            } else {
+                return ResponseEntity.status(NOT_FOUND).build();
+            }
+        } catch (Error e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     public ResponseEntity<?> getUsuarios(){
         try{
             List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
@@ -53,7 +67,7 @@ public class UsuarioService {
         try{
             Usuario usuarioExistente = ur.findByUsername(u.getUsername());
             if(usuarioExistente != null){
-                return ResponseEntity.status(CONFLICT).body("Usuario preexistente");
+                return ResponseEntity.status(CONFLICT).build();
             }
             String pass = u.getPass();
             Pattern patron = Pattern.compile(".*[a-zA-Z].*[0-9].*");

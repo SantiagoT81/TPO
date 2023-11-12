@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Usuario } from '../Models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,13 @@ export class UsuarioService {
   }
   getByID(id: number): Observable<any>{
     return this.http.get(this.url + "/" + id)
+  }
+
+  getByUsername(username: string): Observable<Usuario>{
+    return this.http.get<Usuario>(this.url + "/nombre/" + username)
+  }
+  
+  post(usuario: Usuario): Observable<any>{
+    return this.http.post(this.url + "/agregar", usuario)
   }
 }
