@@ -72,4 +72,5 @@ export class FormularioPublicacionComponent {
       console.log(data)
     })
   }
+
 }
